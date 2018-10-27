@@ -1,80 +1,35 @@
-import pandas as pd
 import numpy as np
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.metrics.pairwise import linear_kernel
-from ast import literal_eval
-metadata = pd.read_csv("./the-movies-dataset/movies_metadata.csv", low_memory=False)
+import pandas as pd
+def show_predictions(input):
+    #load datasets
+    ratings_data = pd.read_csv("ml-latest-small\\ratings.csv")
+    movie_names = pd.read_csv("ml-latest-small\\movies.csv")
+    #merge the two datasets
+    movie_data = pd.merge(ratings_data, movie_names, on='movieId')
 
-credits = pd.read_csv('./the-movies-dataset/credits.csv')
-keywords = pd.read_csv('./the-movies-dataset/keywords.csv')
+    #add mean rating for every movie and group by title
+    ratings_mean_count = pd.DataFrame(movie_data.groupby('title')['rating'].mean())
 
-metadata = metadata.drop([19730, 29503, 35587])
+    #count the total number of ratings and add them to the dataset
+    ratings_mean_count['rating_counts'] = pd.DataFrame(movie_data.groupby('title')['rating'].count())
 
-# Convert IDs to int. Required for merging
-keywords['id'] = keywords['id'].astype('int')
-credits['id'] = credits['id'].astype('int')
-metadata['id'] = metadata['id'].astype('int')
+    #we create a matrix of users as rows and movies as columns with cells as the rating for a particular movie
+    #by a particular user
+    user_movie_rating = movie_data.pivot_table(index='userId', columns='title', values='rating')
 
-# Merge keywords and credits into your main metadata dataframe
-metadata = metadata.merge(credits, on='id')
-metadata = metadata.merge(keywords, on='id')
+    #we find the rating for the movie given by the users and then we corelate it with every other movie in the dataset
+    movie_rating = user_movie_rating[input]
+    movies_like_input = user_movie_rating.corrwith(movie_rating)
 
-features = ['cast', 'crew', 'keywords', 'genres']
-for feature in features:
-    metadata[feature] = metadata[feature].apply(literal_eval)
+    #we add a column in the dataset to represent the correlation
+    corr_movie = pd.DataFrame(movies_like_input, columns=['Correlation'])
 
-# Get the director's name from the crew feature. If director is not listed, return NaN
-def get_director(x):
-    for i in x:
-        if i['job'] == 'Director':
-            return i['name']
-    return np.nan
+    #we drop the users who didn't give a rating and sort the table
+    corr_movie.dropna(inplace=True)
+    corr_movie.sort_values('Correlation',ascending=False)
 
-# Returns the list top 3 elements or entire list; whichever is more.
-def get_list(x):
-    if isinstance(x, list):
-        names = [i['name'] for i in x]
-        #Check if more than 3 elements exist. If yes, return only first three. If no, return entire list.
-        if len(names) > 3:
-            names = names[:3]
-        return names
+    #we join the ratingscount column from the original dataset
+    corr_movie = corr_movie.join(ratings_mean_count['rating_counts'])
 
-    #Return empty list in case of missing/malformed data
-    return []
-
-# Define new director, cast, genres and keywords features that are in a suitable form.
-metadata['director'] = metadata['crew'].apply(get_director)
-
-features = ['cast', 'keywords', 'genres']
-for feature in features:
-    metadata[feature] = metadata[feature].apply(get_list)
-
-# Print the new features of the first 3 films
-metadata[['title', 'cast', 'director', 'keywords', 'genres']].head(3)
-
-# Function to convert all strings to lower case and strip names of spaces
-def clean_data(x):
-    if isinstance(x, list):
-        return [str.lower(i.replace(" ", "")) for i in x]
-    else:
-        #Check if director exists. If not, return empty string
-        if isinstance(x, str):
-            return str.lower(x.replace(" ", ""))
-        else:
-            return ''
-
-features = ['cast', 'keywords', 'director', 'genres']
-
-for feature in features:
-    metadata[feature] = metadata[feature].apply(clean_data)
-
-def create_soup(x):
-    return ' '.join(x['keywords']) + ' ' + ' '.join(x['cast']) + ' ' + x['director'] + ' ' + ' '.join(x['genres'])
-
-metadata['soup'] = metadata.apply(create_soup, axis=1)
-
-count = CountVectorizer(stop_words='english')
-count_matrix = count.fit_transform(metadata['soup'])
-
-
+    #display the movies with more than 50 votes and highest correlation
+    corr_movie[corr_movie['rating_counts']>50].sort_values('Correlation', ascending=False).head()
