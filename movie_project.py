@@ -30,46 +30,6 @@ from recommendation_system import show_predictions
 
 
 
-# db.execute('''INSERT INTO MOVIES VALUES (1, 'Venom', 7)''')
-# db.execute('''INSERT INTO MOVIES VALUES (2, 'Iron Man', 8)''')
-# db.execute('''INSERT INTO MOVIES  VALUES (3, 'Spider-Man', 7)''')
-# db.execute('''INSERT INTO MOVIES VALUES (4, 'Black panther', 8)''')
-# db.execute('''INSERT INTO MOVIES VALUES (5, 'Harry potter and the chamber of secrets', 7)''')
-# db.execute('''INSERT INTO MOVIES VALUES (6, 'Greatest showman', 7)''')
-# db.execute('''INSERT INTO MOVIES  VALUES (7, 'La la land', 8)''')
-# db.execute('''INSERT INTO MOVIES VALUES (8, 'Titanic', 8)''')
-# db.execute('''INSERT INTO MOVIES VALUES (9, 'The Avengers', 8)''')
-# db.execute('''INSERT INTO MOVIES VALUES (10, 'Avengers age of ultron', 7)''')
-# db.execute('''INSERT INTO MOVIES VALUES (11, 'Thor', 7)''')
-# db.execute('''INSERT INTO MOVIES VALUES (12, 'Batman Arkham knight', 8)''')
-# db.execute('''INSERT INTO MOVIES VALUES (13, 'Flash', 8)''')
-# db.execute('''INSERT INTO MOVIES VALUES (14, 'Justice League', 6)''')
-# db.commit()
-
-
-
-
-
-# db.execute('''INSERT INTO PROJECTIONS VALUES (1, 1, '3d','2018-10-12', '0900')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (2, 1, '2d', '2018-10-12', '1000')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (3, 2, '3d', '2018-10-12', '0800')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (4, 2, '2d', '2018-10-12', '1200')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (5, 3, '3d', '2018-10-12', '0900')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (6, 4, '2d', '2018-10-12','1900')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (7, 5, '3d', '2018-10-12', '2100')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (8, 6, '2d', '2018-10-01', '2200')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (9, 6, '3d', '2018-10-12', '1000')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (10, 7, '2d', '2018-10-12', '0800')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (11, 8, '2d', '2018-10-12', '1200')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (12, 8, '3d', '2018-10-12', '0900')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (13, 9, '3d', '2018-10-12', '1900')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (14, 10, '2d', '2018-10-12', '2100')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (15, 11, '3d', '2018-10-12', '2200')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (16, 12, '2d', '2018-10-12', '1000')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (17, 13, '2d', '2018-10-12', '0800')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (18, 13, '3d', '2018-10-12', '1200')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (19, 14, '3d', '2018-10-12', '0900')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (20, 14, '3d', '2018-10-12', '1900')''')
 
 
 # db.commit()
