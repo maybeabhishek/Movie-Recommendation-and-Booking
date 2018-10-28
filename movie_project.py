@@ -245,7 +245,7 @@ def main():
     db = sqlite3.connect("database.db")
     db.row_factory = sqlite3.Row
     cursor = db.cursor()
-
+    
     db_communicator = DBCommunicator(cursor,db)
     controller = Controller(db_communicator)
     print("Use the following commands to book a movie\n")
