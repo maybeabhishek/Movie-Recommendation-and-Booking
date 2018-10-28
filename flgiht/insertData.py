@@ -50,8 +50,8 @@ flight_name, flight_rating) VALUES(?,?)
 """, flights)
 db.commit()
 
-# Insert Projections
-projections = [
+# Insert journeys
+journeys = [
     (1, 'Washington-New York,Business','2018-10-12', '09:00'),
     (1, 'London-Budapest,Economy', '2018-10-12', '10:00'),
     (2, 'Dubai-Mumbai,Business', '2018-10-12', '08:00'),
@@ -74,9 +74,9 @@ projections = [
     (14, 'Delhi-Mumbai,Business', '2018-10-12', '19:00')
 
 ]
-cursor.executemany(""" INSERT INTO Projections(
-movie_id, journey_type, journey_date, journey_time) VALUES(?,?,?,?)
-""", projections)
+cursor.executemany(""" INSERT INTO Journey(
+flight_id, journey_type, journey_date, journey_time) VALUES(?,?,?,?)
+""", journeys)
 db.commit()
 
 # Insert Reservations
