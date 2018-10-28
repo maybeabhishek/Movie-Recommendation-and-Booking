@@ -75,7 +75,7 @@ class DBCommunicator:
                                     JOIN Movies
                                     ON Projections.movie_id = Movies.id
                                     WHERE movie_id = ?
-                                    ORDER BY projection_date''', (str(movie_id),))
+                                    ORDER BY projection_date''', (str(movie_id),));
 
     def get_projections_with_date(self, movie_id, date):
         return self.cursor.execute('''SELECT Projections.id, projection_type, projection_time,
@@ -92,7 +92,7 @@ class DBCommunicator:
                                           WHERE projection_id = ?''', (projection_id,))
 
     def final_reservation(self, user, proj_id, row, col):
-        self.cursor.execupythote('''INSERT INTO Reservations(
+        self.cursor.execute('''INSERT INTO Reservations(
                                   username, projection_id, row, col) VALUES(?,?,?,?)''', (user, proj_id, row, col))
         self.db.commit()
 
@@ -169,9 +169,9 @@ class CLI:
 
         self.__user_is_active = True
         self.commands = {
-            "show_movies": self.show_movies,
-            "show_projections": self.show_projections,
-            "make_reservations": self.make_reservations,
+            "1": self.show_movies,
+            "2": self.show_projections,
+            "3": self.make_reservations,
             "exit": self.exit
         }
 
@@ -217,6 +217,11 @@ class CLI:
 
     def start(self):
         print("Hello!")
+        print("Use the following commands to book a movie\n")
+        print("1. show_movies")
+        print("2. show_projections")
+        print("3. make_reservations")
+        print("exit\n\n")
         while self.__user_is_active:
             command = ""
             parameter1 = None
@@ -248,10 +253,7 @@ def main():
     
     db_communicator = DBCommunicator(cursor,db)
     controller = Controller(db_communicator)
-    print("Use the following commands to book a movie\n")
-    print("make_reservations")
-    print("show_movies")
-    print("show_projections")
+
     cli = CLI(controller)
     cli.start()
 
