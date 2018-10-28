@@ -1,7 +1,7 @@
 import sqlite3
 from prettytable import PrettyTable
 from simple_settings import settings
-
+from recommendation_system import show_predictions
 
 # db = sqlite3.connect('movie_data.db')
 
@@ -92,7 +92,7 @@ from simple_settings import settings
 # INSERT INTO "SYSTEM"."PROJECTIONS" ("ID", "MOVIE_ID", "TYPE", "MOVIEDATE", "TIME") VALUES (20, 14, '3d', TO_DATE('2018-10-12 06:20:13', 'YYYY-MM-DD HH24:MI:SS'), '1900')
 
 # db.close()
-
+ticketPrice = 140
 
 class DBCommunicator:
 
@@ -131,6 +131,9 @@ class DBCommunicator:
         self.cursor.execute('''INSERT INTO Reservations(
                                   username, projection_id, row, col) VALUES(?,?,?,?)''', (user, proj_id, row, col))
         self.db.commit()
+
+    def get_movieName(self,movie_id):
+        return self.cursor.execute('''SELECT movie_name from movies where movie_id = ?''',str(movie_id))
 
 
 class Controller:
@@ -188,6 +191,10 @@ class Controller:
     def fin_reservation(self, user, projection_id, row, col):
         self.db_communicator.final_reservation(user,projection_id, row, col)
 
+    def recommend_movies(self,movie_id):
+        movie_name = self.db_communicator.get_movieName(movie_id)
+        show_predictions(movie_name)
+
 
 class CLI:
 
@@ -230,6 +237,12 @@ class CLI:
             ticketC = int(input("Enter Column: "))
             self.controller.fin_reservation(username, projection_id, ticketR, ticketC)
             print("The ticket is booked\n")
+
+        print("Your total fare is: ")
+        print(number_of_tickets*ticketPrice)
+        print('\n')
+        print("Here are some similar movies you may like: ")
+        self.controller.recommend_movies(movie_id)
         # if finalize
         # insert query
 
