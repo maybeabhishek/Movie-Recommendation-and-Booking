@@ -269,6 +269,10 @@ def main():
 
     db_communicator = DBCommunicator(cursor,db)
     controller = Controller(db_communicator)
+    print("Use the following commands to book a movie\n")
+    print("make_reservations")
+    print("show_movies")
+    print("show_projections")
     cli = CLI(controller)
     cli.start()
 
