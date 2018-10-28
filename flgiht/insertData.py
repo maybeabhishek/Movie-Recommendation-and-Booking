@@ -11,7 +11,7 @@ cursor.execute(create_flight_table)
 
 create_journey_table = """
 CREATE TABLE IF NOT EXISTS
-Journey(id INTEGER PRIMARY KEY, flight_id INTEGER, seat_type TEXT,
+Journey(id INTEGER PRIMARY KEY, flight_id INTEGER, journey_type TEXT,
 journey_date TEXT, journey_time TEXT,
 FOREIGN KEY (flight_id) REFERENCES Flights(id))
 """
@@ -75,7 +75,7 @@ projections = [
 
 ]
 cursor.executemany(""" INSERT INTO Projections(
-movie_id, projection_type, projection_date, projection_time) VALUES(?,?,?,?)
+movie_id, journey_type, journey_date, journey_time) VALUES(?,?,?,?)
 """, projections)
 db.commit()
 
@@ -91,6 +91,6 @@ reservations = [
 ]
 
 cursor.executemany(""" INSERT INTO Reservations(
-username, projection_id, row, col) VALUES(?,?,?,?)
+username, journey_id, row, col) VALUES(?,?,?,?)
 """, reservations)
 db.commit()
