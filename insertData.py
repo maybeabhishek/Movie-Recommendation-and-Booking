@@ -1,5 +1,5 @@
 import sqlite3
-db = sqlite3.connect("movie_db.db")
+db = sqlite3.connect("database.db")
 cursor = db.cursor()
 
 # Create tables
@@ -28,20 +28,27 @@ db.commit()
 
 # Insert Movies
 movies = [
-    ('Venom', 7),
-    ('Iron Man', 8),
-    ('Spider-Man', 7),
-    ('Black panther', 8),
-    ('Harry potter and the chamber of secrets', 7),
-    ('Greatest showman', 7),
-    ('La la land', 8),
-    ('Titanic', 8),
-    ('The Avengers', 8),
-    ('Avengers age of ultron', 7),
-    ('Thor', 7),
-    ('Batman Arkham knight', 8),
-    ('Flash', 8),
-    ('Justice League', 6)
+    ('Toy Story (1995)', 7),
+    ('Jumanji (1995)', 8),
+    ('Breakfast Club, The (1985)', 7),
+    ('Forrest Gump (1994)', 8),
+    ('Pulp Fiction (1994)', 7),
+    ('Shawshank Redemption, The (1994)', 7),
+    ('Silence of the Lambs, The (1991)', 8),
+    ('Star Wars: Episode IV - A New Hope (1977)', 8),
+    ('Matrix, The (1999)', 8),
+    ('Jurassic Park (1993)', 7),
+    ('Braveheart (1995)', 7),
+    ('Terminator 2: Judgment Day (1991)', 8),
+    ("Schindler's List (1993)", 8),
+    ('Fight Club (1999)', 8),
+    ('Star Wars: Episode V - The Empire Strikes Back (1980)', 9),
+    ('Usual Suspects, The (1995)', 9),
+    ('Lord of the Rings: The Fellowship of the Ring, The (2001)', 8),
+    ('American Beauty (1999)', 6),
+    ('Seven (a.k.a. Se7en) (1995)', 8),
+    ('Independence Day (a.k.a. ID4) (1996)', 7),
+    ('Apollo 13 (1995)', 7)
 ]
 
 cursor.executemany(""" INSERT INTO Movies(
@@ -70,7 +77,25 @@ projections = [
     (13, '2d', '2018-10-12', '08:00'),
     (13, '3d', '2018-10-12', '12:00'),
     (14, '3d', '2018-10-12', '09:00'),
-    (14, '3d', '2018-10-12', '19:00')
+    (14, '3d', '2018-10-12', '19:00'),
+    (15, '3d','2018-10-12', '09:00'),
+    (15, '2d', '2018-10-12', '10:00'),
+    (16, '3d', '2018-10-12', '08:00'),
+    (16, '2d', '2018-10-12', '12:00'),
+    (17, '3d', '2018-10-12', '09:00'),
+    (18, '2d', '2018-10-12','19:00'),
+    (18, '3d', '2018-10-12', '21:00'),
+    (18, '2d', '2018-10-01', '22:00'),
+    (19, '3d', '2018-10-12', '10:00'),
+    (19, '2d', '2018-10-12', '08:00'),
+    (19, '2d', '2018-10-12', '12:00'),
+    (20, '3d', '2018-10-12', '0900'),
+    (20, '3d', '2018-10-12', '19:00'),
+    (20, '2d', '2018-10-12', '21:00'),
+    (21, '3d', '2018-10-12', '22:00'),
+    (21, '2d', '2018-10-12', '10:00'),
+    (21, '2d', '2018-10-12', '08:00'),
+    (21, '3d', '2018-10-12', '12:00')
 
 ]
 cursor.executemany(""" INSERT INTO Projections(

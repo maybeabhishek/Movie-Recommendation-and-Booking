@@ -1,11 +1,14 @@
 import sqlite3
 from prettytable import PrettyTable
-from simple_settings import settings
 
+from recommendation_system import show_predictions
 
 # db = sqlite3.connect('movie_data.db')
-
-
+# cursor = db.cursor()
+# cursor.execute('''DELETE from movies;''')
+#
+# db.commit()
+# cursor.execute('''SELECT * from movies;''')
 # db.execute('''CREATE TABLE movies
 #          (ID INT PRIMARY KEY  NOT NULL,
 #          MOVIE_NAME TEXT NOT NULL,
@@ -27,46 +30,6 @@ from simple_settings import settings
 
 
 
-# db.execute('''INSERT INTO MOVIES VALUES (1, 'Venom', 7)''')
-# db.execute('''INSERT INTO MOVIES VALUES (2, 'Iron Man', 8)''')
-# db.execute('''INSERT INTO MOVIES  VALUES (3, 'Spider-Man', 7)''')
-# db.execute('''INSERT INTO MOVIES VALUES (4, 'Black panther', 8)''')
-# db.execute('''INSERT INTO MOVIES VALUES (5, 'Harry potter and the chamber of secrets', 7)''')
-# db.execute('''INSERT INTO MOVIES VALUES (6, 'Greatest showman', 7)''')
-# db.execute('''INSERT INTO MOVIES  VALUES (7, 'La la land', 8)''')
-# db.execute('''INSERT INTO MOVIES VALUES (8, 'Titanic', 8)''')
-# db.execute('''INSERT INTO MOVIES VALUES (9, 'The Avengers', 8)''')
-# db.execute('''INSERT INTO MOVIES VALUES (10, 'Avengers age of ultron', 7)''')
-# db.execute('''INSERT INTO MOVIES VALUES (11, 'Thor', 7)''')
-# db.execute('''INSERT INTO MOVIES VALUES (12, 'Batman Arkham knight', 8)''')
-# db.execute('''INSERT INTO MOVIES VALUES (13, 'Flash', 8)''')
-# db.execute('''INSERT INTO MOVIES VALUES (14, 'Justice League', 6)''')
-# db.commit()
-
-
-
-
-
-# db.execute('''INSERT INTO PROJECTIONS VALUES (1, 1, '3d','2018-10-12', '0900')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (2, 1, '2d', '2018-10-12', '1000')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (3, 2, '3d', '2018-10-12', '0800')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (4, 2, '2d', '2018-10-12', '1200')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (5, 3, '3d', '2018-10-12', '0900')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (6, 4, '2d', '2018-10-12','1900')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (7, 5, '3d', '2018-10-12', '2100')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (8, 6, '2d', '2018-10-01', '2200')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (9, 6, '3d', '2018-10-12', '1000')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (10, 7, '2d', '2018-10-12', '0800')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (11, 8, '2d', '2018-10-12', '1200')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (12, 8, '3d', '2018-10-12', '0900')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (13, 9, '3d', '2018-10-12', '1900')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (14, 10, '2d', '2018-10-12', '2100')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (15, 11, '3d', '2018-10-12', '2200')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (16, 12, '2d', '2018-10-12', '1000')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (17, 13, '2d', '2018-10-12', '0800')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (18, 13, '3d', '2018-10-12', '1200')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (19, 14, '3d', '2018-10-12', '0900')''')
-# db.execute('''INSERT INTO PROJECTIONS VALUES (20, 14, '3d', '2018-10-12', '1900')''')
 
 
 # db.commit()
@@ -92,6 +55,7 @@ from simple_settings import settings
 # INSERT INTO "SYSTEM"."PROJECTIONS" ("ID", "MOVIE_ID", "TYPE", "MOVIEDATE", "TIME") VALUES (20, 14, '3d', TO_DATE('2018-10-12 06:20:13', 'YYYY-MM-DD HH24:MI:SS'), '1900')
 
 # db.close()
+ticketPrice = 140
 
 
 class DBCommunicator:
@@ -111,7 +75,7 @@ class DBCommunicator:
                                     JOIN Movies
                                     ON Projections.movie_id = Movies.id
                                     WHERE movie_id = ?
-                                    ORDER BY projection_date''', (str(movie_id),))
+                                    ORDER BY projection_date''', (str(movie_id),));
 
     def get_projections_with_date(self, movie_id, date):
         return self.cursor.execute('''SELECT Projections.id, projection_type, projection_time,
@@ -128,9 +92,12 @@ class DBCommunicator:
                                           WHERE projection_id = ?''', (projection_id,))
 
     def final_reservation(self, user, proj_id, row, col):
-        self.cursor.execupythote('''INSERT INTO Reservations(
+        self.cursor.execute('''INSERT INTO Reservations(
                                   username, projection_id, row, col) VALUES(?,?,?,?)''', (user, proj_id, row, col))
         self.db.commit()
+
+    def get_movieName(self,movie_id):
+        return self.cursor.execute('''SELECT movie_name from movies where id = ?''',(movie_id,))
 
 
 class Controller:
@@ -188,6 +155,12 @@ class Controller:
     def fin_reservation(self, user, projection_id, row, col):
         self.db_communicator.final_reservation(user,projection_id, row, col)
 
+    def recommend_movies(self,movie_id):
+        movie_name = self.db_communicator.get_movieName(movie_id)
+        for row in movie_name:
+            show_predictions(row["movie_name"])
+        # show_predictions(movie_name)
+
 
 class CLI:
 
@@ -196,9 +169,9 @@ class CLI:
 
         self.__user_is_active = True
         self.commands = {
-            "show_movies": self.show_movies,
-            "show_projections": self.show_projections,
-            "make_reservations": self.make_reservations,
+            "1": self.show_movies,
+            "2": self.show_projections,
+            "3": self.make_reservations,
             "exit": self.exit
         }
 
@@ -230,6 +203,12 @@ class CLI:
             ticketC = int(input("Enter Column: "))
             self.controller.fin_reservation(username, projection_id, ticketR, ticketC)
             print("The ticket is booked\n")
+
+        print("Your total fare is: ")
+        print(number_of_tickets*ticketPrice)
+        print('\n')
+        print("Here are some similar movies you may like: ")
+        self.controller.recommend_movies(movie_id)
         # if finalize
         # insert query
 
@@ -238,6 +217,11 @@ class CLI:
 
     def start(self):
         print("Hello!")
+        print("Use the following commands to book a movie\n")
+        print("1. show_movies")
+        print("2. show_projections")
+        print("3. make_reservations")
+        print("exit\n\n")
         while self.__user_is_active:
             command = ""
             parameter1 = None
@@ -263,12 +247,13 @@ class Validator:
 
 
 def main():
-    db = sqlite3.connect("movie_db.db")
+    db = sqlite3.connect("database.db")
     db.row_factory = sqlite3.Row
     cursor = db.cursor()
-
+    
     db_communicator = DBCommunicator(cursor,db)
     controller = Controller(db_communicator)
+
     cli = CLI(controller)
     cli.start()
 
