@@ -1,11 +1,14 @@
 import sqlite3
 from prettytable import PrettyTable
-from simple_settings import settings
+
 from recommendation_system import show_predictions
 
 # db = sqlite3.connect('movie_data.db')
-
-
+# cursor = db.cursor()
+# cursor.execute('''DELETE from movies;''')
+#
+# db.commit()
+# cursor.execute('''SELECT * from movies;''')
 # db.execute('''CREATE TABLE movies
 #          (ID INT PRIMARY KEY  NOT NULL,
 #          MOVIE_NAME TEXT NOT NULL,
@@ -94,6 +97,7 @@ from recommendation_system import show_predictions
 # db.close()
 ticketPrice = 140
 
+
 class DBCommunicator:
 
     def __init__(self, cursor,db):
@@ -133,7 +137,7 @@ class DBCommunicator:
         self.db.commit()
 
     def get_movieName(self,movie_id):
-        return self.cursor.execute('''SELECT movie_name from movies where movie_id = ?''',str(movie_id))
+        return self.cursor.execute('''SELECT movie_name from movies where id = ?''',(movie_id,))
 
 
 class Controller:
@@ -193,7 +197,9 @@ class Controller:
 
     def recommend_movies(self,movie_id):
         movie_name = self.db_communicator.get_movieName(movie_id)
-        show_predictions(movie_name)
+        for row in movie_name:
+            show_predictions(row["movie_name"])
+        # show_predictions(movie_name)
 
 
 class CLI:
@@ -276,7 +282,7 @@ class Validator:
 
 
 def main():
-    db = sqlite3.connect("movie_db.db")
+    db = sqlite3.connect("database.db")
     db.row_factory = sqlite3.Row
     cursor = db.cursor()
 

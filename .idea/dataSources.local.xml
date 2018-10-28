@@ -9,5 +9,14 @@
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
       <introspection-schemas>*:</introspection-schemas>
     </data-source>
+    <data-source name="movie_data [2]" uuid="1cb7081c-5d04-4fc3-9cac-f8839f1896d1">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+    </data-source>
+    <data-source name="movie_new_db" uuid="beb90b04-1cab-4d9d-b6fd-5ca1d2073a71">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+    </data-source>
+    <data-source name="movie_new_db [2]" uuid="0ecf90d4-4f00-4674-a95e-29569012f323">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+    </data-source>
   </component>
 </project>
