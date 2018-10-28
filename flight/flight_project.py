@@ -197,7 +197,7 @@ class CLI:
         self.__user_is_active = True
         self.commands = {
             "show_flights": self.show_flights,
-            "show_journeys": self.show_journeys,
+            "show_airlines": self.show_airlines,
             "make_reservations": self.make_reservations,
             "exit": self.exit
         }
@@ -205,7 +205,7 @@ class CLI:
     def show_flights(self, *args):
         print(self.controller.generate_flights_table())
 
-    def show_journeys(self, *args):
+    def show_airlines(self, *args):
         flight_id = args[0]
         date = None
         if len(args) > 1:
@@ -220,7 +220,7 @@ class CLI:
         number_of_tickets = int(input("Enter number of tickets: "))
         self.show_flights()
         flight_id = int(input("Enter flight id: "))
-        self.show_journeys(flight_id)
+        self.show_airlines(flight_id)
         journey_id = int(input("Enter journey id: "))
         self.show_reservations(self.controller.create_cinema(journey_id))
         # ask for ticket seats
