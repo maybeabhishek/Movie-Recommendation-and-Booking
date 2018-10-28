@@ -128,7 +128,7 @@ class DBCommunicator:
                                           WHERE projection_id = ?''', (projection_id,))
 
     def final_reservation(self, user, proj_id, row, col):
-        self.cursor.execute('''INSERT INTO Reservations(
+        self.cursor.execupythote('''INSERT INTO Reservations(
                                   username, projection_id, row, col) VALUES(?,?,?,?)''', (user, proj_id, row, col))
         self.db.commit()
 
