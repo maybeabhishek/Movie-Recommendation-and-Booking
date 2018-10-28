@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Flights</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <link rel="stylesheet" href="/static/banner.css">
+  <link rel="stylesheet" href="/static/flight.css">
+
+  <script src="/static/lib/jQuery.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  {% include 'navbar.htm' %}
+  <div class="banner">
+    <div class="image-container">
+      <img src="/static/images/flight1.jpg">
+    </div>
+    <div class="text-area">
+      <h1>Fly Abroad!</h1>
+    </div>
+  </div>
+
+  <div class="container flight-container">
+    <h3 class="text-info">Search for flight</h3>
+    <form class="form-row">
+      <div class="form-group col-5">
+        <input class="form-control" placeholder="From">
+      </div>
+      <div class="form-group col-5">
+        <input class="form-control" placeholder="To">
+      </div>
+      <div class="form-group col-2">
+        <button class="btn btn-primary">Search</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
