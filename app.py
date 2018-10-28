@@ -14,4 +14,11 @@ def renderMovie():
 def renderFlight():
   return render_template("flight.htm")
 
+@app.route("/login")
+def renderLogin():
+  return render_template("login.htm")
+
+@app.route("/register")
+def renderRegister():
+  return render_template("register.htm")
 app.run(port=80, debug=True)
