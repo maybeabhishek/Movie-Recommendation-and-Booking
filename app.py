@@ -7,7 +7,11 @@ def renderHome():
   return render_template("home.htm")
 
 @app.route("/movie")
-def renderMove():
+def renderMovie():
   return render_template("movie.htm")
+
+@app.route("/flight")
+def renderFlight():
+  return render_template("flight.htm")
 
 app.run(port=80, debug=True)

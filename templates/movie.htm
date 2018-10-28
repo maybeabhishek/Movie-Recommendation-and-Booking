@@ -15,36 +15,29 @@
 
 <body>
   {% include 'navbar.htm' %}
+  <div class="banner">
+    <img src="/static/images/movie1.jpg">
+    <div class="text-area">
+      <h1>Movies</h1>
+    </div>
+  </div>
   <div class="container mt-4">
     <!-- Tabs -->
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-view" role="tab"
-          aria-controls="nav-view" aria-selected="true">View Bookings</a>
-        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-create" role="tab" aria-controls="nav-create"
-          aria-selected="false">Create New</a>
+        <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-create" role="tab"
+          aria-controls="nav-create" aria-selected="false">Create New</a>
+        <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-view" role="tab" aria-controls="nav-view"
+          aria-selected="true">View Bookings</a>
+
       </div>
     </nav>
 
 
     <!-- Tab Content -->
     <div class="tab-content mt-4" id="nav-tabContent">
-      <!-- View Bookings -->
-      <div class="tab-pane fade show active" id="nav-view" role="tabpanel">
-        <table class="table table-light table-bordered">
-          <thead class="table-success">
-            <tr>
-              <td>Movie Name</td>
-              <td>Movie Date</td>
-              <td>Movie Time</td>
-              <td>Movie Seats</td>
-            </tr>
-          </thead>
-        </table>
-      </div>
-
       <!-- Create New -->
-      <div class="tab-pane fade" id="nav-create" role="tabpanel">
+      <div class="tab-pane fade show active" id="nav-create" role="tabpanel">
 
         <div class="form-container">
           <div class="row">
@@ -82,6 +75,22 @@
           </div>
         </div>
       </div>
+
+      <!-- View Bookings -->
+      <div class="tab-pane fade" id="nav-view" role="tabpanel">
+        <table class="table table-light table-bordered">
+          <thead class="table-success">
+            <tr>
+              <td>Movie Name</td>
+              <td>Movie Date</td>
+              <td>Movie Time</td>
+              <td>Movie Seats</td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
+
     </div>
 
   </div>
