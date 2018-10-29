@@ -29,7 +29,7 @@
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-create" role="tab"
-          aria-controls="nav-create" aria-selected="false">Create New</a>
+          aria-controls="nav-create" aria-selected="false">Book New</a>
         <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-view" role="tab" aria-controls="nav-view"
           aria-selected="true">View Bookings</a>
 
@@ -125,13 +125,18 @@
         console.log(data);
         var innerHTMLText = '';
         data.showtimes.forEach(function(movie){
-          innerHTMLText+='<tr><td>'+movie[1]+'</td><td>'+movie[2]+'</td><td>'+movie[3]+'</td></td><td><button class="btn btn-sm btn-success">Book</button></td>';
+          innerHTMLText+='<tr><td>'+movie[1]+'</td><td>'+movie[2]+'</td><td>'+movie[3]+'</td></td><td><button class="btn btn-sm btn-success" onclick="book('+movie[4]+')">Book</button></td>';
         });
         document.querySelector("#movieSelectionTable").classList.remove("d-none");
         document.querySelector("#movieSelectionTable tbody").innerHTML = innerHTMLText;
 
       })
     });
+
+    function book(showtimeId){
+      console.log('book')
+      window.location.replace("/movie/book/"+document.querySelector("#movie-name").value+"/"+showtimeId);
+    }
   </script>
 </body>
 

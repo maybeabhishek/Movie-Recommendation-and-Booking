@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Book | {{movie[1]}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <!-- <link rel="stylesheet" href="/static/banner.css"> -->
+
+  <script src="/static/lib/jQuery.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  {% include 'navbar.htm' %}
+  <div class="container mt-4">
+    <h3 class="text-danger">Movie details</h3>
+    <hr>
+    <table class="table table-borderless table-sm">
+      <tr>
+        <td>Movie: </td>
+        <td>{{movie[0]}}</td>
+      </tr>
+      <tr>
+        <td>Type: </td>
+        <td>{{showtime[1]}}</td>
+      </tr>
+      <tr>
+        <td>Date: </td>
+        <td>{{showtime[2]}}</td>
+      </tr>
+      <tr>
+        <td>Time: </td>
+        <td>{{showtime[3]}}</td>
+      </tr>
+    </table>
+
+    <h3 class="text-danger">User details</h3>
+    <hr>
+    <table class="table table-borderless table-sm">
+      <tr>
+        <td>First Name: </td>
+        <!-- <td>{{movie[0]}}</td> -->
+      </tr>
+      <tr>
+        <td>Last Name: </td>
+        <!-- <td>{{showtime[1]}}</td> -->
+      </tr>
+      <tr>
+        <td>Select Seats: </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+        </td>
+        <!-- <td>{{showtime[2]}}</td> -->
+      </tr>
+    </table>
+
+    <button class="btn btn-success">Book</button>
+  </div>
+
+</body>
+
+</html>

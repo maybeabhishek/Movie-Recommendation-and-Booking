@@ -10,8 +10,20 @@ class Movie:
     rows = cur.fetchall()
     return rows
   
+  def getMovieById(self, movieId):
+    cur = self.conn.cursor()
+    cur.execute("Select MOVIE_NAME from MOVIES where id="+movieId)
+    rows = cur.fetchall()
+    return rows
+
   def getShowTimes(self, movieId):
     cur = self.conn.cursor()
-    cur.execute("Select movie_id, projection_type, projection_date, projection_time from Projections where movie_id="+movieId+" order by projection_date")
+    cur.execute("Select movie_id, projection_type, projection_date, projection_time, id from Projections where movie_id="+movieId+" order by projection_date")
+    rows = cur.fetchall()
+    return rows
+
+  def getMovieShowtime(self, movieId, projectionId):
+    cur = self.conn.cursor()
+    cur.execute("Select movie_id, projection_type, projection_date, projection_time, id from Projections where movie_id="+movieId+" and id="+projectionId+" order by projection_date")
     rows = cur.fetchall()
     return rows
