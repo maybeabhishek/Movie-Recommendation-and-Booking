@@ -17,35 +17,35 @@
 
   {% include 'navbar.htm' %}
   <div class="container login-form">
-    <div class="form-row">
+    <form class="form-row" action='' method="POST">
       <div class="col-12">
         <div class="form-row">
           <div class="form-group col-6">
-              <input class="form-control" placeholder="First Name">
+            <input class="form-control" placeholder="First Name">
           </div>
           <div class="form-group col-6">
-              <input class="form-control" placeholder="Last Name">
+            <input class="form-control" placeholder="Last Name">
           </div>
         </div>
       </div>
       <div class="form-group col-12">
-        <input class="form-control" placeholder="Username">
+        <input class="form-control" name='username' placeholder="Username">
       </div>
       <div class="form-group col-12">
-        <input class="form-control" placeholder="Password">
+        <input class="form-control" name='password' placeholder="Password">
       </div>
       <div class="form-group col-12">
-          <input class="form-control" placeholder="Confirm Password">
-        </div>
-    </div>
-    <div class="form-group col-4">
-      <div class="row">
-        <div class="col-6">
-          <button class="btn btn-success">Register</button>
+        <input class="form-control" placeholder="Confirm Password">
+      </div>
+      <div class="form-group col-4">
+        <div class="row">
+          <div class="col-6">
+            <button class="btn btn-success">Register</button>
+          </div>
         </div>
       </div>
+    </form>
 
-    </div>
 
   </div>
 </body>

@@ -4,12 +4,11 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Flights</title>
+  <title>Railway</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="/static/banner.css">
-  
 
   <script src="/static/lib/jQuery.min.js"></script>
   <script src="/static/js/bootstrap.min.js"></script>
@@ -19,15 +18,21 @@
   {% include 'navbar.htm' %}
   <div class="banner">
     <div class="image-container">
-      <img src="/static/images/flight1.jpg">
+      <img src="/static/images/railway1.jpg">
     </div>
     <div class="text-area">
-      <h1>Fly Abroad!</h1>
+      <h1>Explore the Country!</h1>
     </div>
   </div>
 
   <div class="container banner-container">
-    <h3 class="text-info">Search for flight</h3>
+    <h3 class="text-info">Search for trains</h3>
+    <select id="train-name" class="form-control">
+      <option>Select Trains!</option>
+      {% for i in trains: %}
+        <option value="{{i[0]}}">{{i[1]}}</option>
+      {% endfor %}
+    </select>
     <!-- <form class="form-row">
       <div class="form-group col-5">
         <input class="form-control" placeholder="From">
@@ -39,19 +44,11 @@
         <button class="btn btn-primary">Search</button>
       </div>
     </form> -->
-    <select id="flight-name" class="form-control">
-      <option>Select Flights!</option>
-      {% for i in flights: %}
-        <option value="{{i[0]}}">{{i[1]}}</option>
-      {% endfor %}
-    </select>
-  </div>
 
-  <div>
-    <table class="table table-borderless d-none table-sm" id="flightSelectionTable">
+    <table class="table table-borderless d-none table-sm mt-4" id="trainSelectionTable">
       <thead class="table-danger">
         <tr>
-          <td>Airline</td>
+          <td>Type</td>
           <td>Date</td>
           <td>Time</td>
           <td></td>
@@ -59,32 +56,25 @@
       </thead>
       <tbody></tbody>
     </table>
-
-
   </div>
+
   <script>
-    document.getElementById("flight-name").addEventListener("change", function () {
+    document.getElementById("train-name").addEventListener("change", function(){
       var id = this.value;
-      $.get("/flight/" + id, function (data) {
+      console.log(this);
+      $.get("/railway/"+id, function(data){
         console.log(data);
         var innerHTMLText = '';
-        data.showtimes.forEach(function (flight) {
-          innerHTMLText += '<tr><td>' + flight[1] + '</td><td>' + flight[2] + '</td><td>' + flight[3] +
-            '</td></td><td><button class="btn btn-sm btn-success" onclick="book(' + flight[4] +
-            ')">Book</button></td>';
+        data.details.forEach(function(train){
+          innerHTMLText+='<tr><td>'+train[1]+'</td><td>'+train[2]+'</td><td>'+train[3]+'</td></td><td><button class="btn btn-sm btn-success" onclick="book('+train[4]+')">Book</button></td>';
         });
-        document.querySelector("#movieSelectionTable").classList.remove("d-none");
-        document.querySelector("#movieSelectionTable tbody").innerHTML = innerHTMLText;
+        document.querySelector("#trainSelectionTable").classList.remove("d-none");
+        document.querySelector("#trainSelectionTable tbody").innerHTML = innerHTMLText;
 
       })
     });
 
-    function book(showtimeId) {
-      console.log('book')
-      window.location.replace("/movie/book/" + document.querySelector("#movie-name").value + "/" + showtimeId);
-    }
   </script>
 </body>
-
 
 </html>

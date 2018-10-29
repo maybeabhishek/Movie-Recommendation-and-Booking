@@ -2,6 +2,14 @@ import sqlite3
 db = sqlite3.connect("database.db")
 cursor = db.cursor()
 
+# Drop all tables
+try:
+    cursor.execute("Drop table movies")
+    cursor.execute("Drop table projections")
+    cursor.execute("Drop table reservations")
+except sqlite3.OperationalError:
+    pass
+
 # Create tables
 create_movies_table = """
 CREATE TABLE IF NOT EXISTS
@@ -58,7 +66,7 @@ db.commit()
 
 # Insert Projections
 projections = [
-    (1, '3d','2018-10-12', '09:00'),
+    (1, '4d','2018-10-12', '09:00'),
     (1, '2d', '2018-10-12', '10:00'),
     (2, '3d', '2018-10-12', '08:00'),
     (2, '2d', '2018-10-12', '12:00'),

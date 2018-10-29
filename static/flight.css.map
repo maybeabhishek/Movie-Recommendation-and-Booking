@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAEA,AAAA,iBAAiB,CAAA;EACf,UAAU,EAAC,IAAI;CAChB",
-    "sources": [
-        "flight.scss"
-    ],
-    "names": [],
-    "file": "flight.css"
-}
