@@ -4,6 +4,9 @@ class Movie:
   def __init__(self):
     self.conn = sqlite3.connect("movie_db.db", check_same_thread=False)
 
+  def close(self):
+    self.conn.close()
+
   def getMovies(self):
     cur = self.conn.cursor()
     cur.execute("Select MOVIE_NAME, ID from MOVIES")

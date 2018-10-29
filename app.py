@@ -41,4 +41,10 @@ def renderLogin():
 @app.route("/register")
 def renderRegister():
   return render_template("register.htm")
+
 app.run(port=8081, debug=True)
+
+
+movie.close()
+app.run(port=80, debug=True)
+
