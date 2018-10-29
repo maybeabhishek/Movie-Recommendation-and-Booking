@@ -207,7 +207,7 @@ class CLI:
         print("Your total fare is: ")
         print(number_of_tickets*ticketPrice)
         print('\n')
-        print("Here are some similar movies you may like: ")
+
         self.controller.recommend_movies(movie_id)
         # if finalize
         # insert query

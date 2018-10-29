@@ -32,6 +32,6 @@ def show_predictions(input):
 
     # we join the ratings_count column from the original dataset
     corr_movie = corr_movie.join(ratings_mean_count['rating_counts'])
-
+    print("Here are some similar movies you may like: ")
     # display the movies with more than 50 votes and highest correlation
     print(corr_movie[corr_movie['rating_counts'] > 50].sort_values('Correlation', ascending=False).head())

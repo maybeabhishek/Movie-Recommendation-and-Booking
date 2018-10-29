@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movie_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/movie_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommendation_system.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommendation_system.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,11 +35,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="movie_project.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="movie_project.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/movie_project.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5180">
-              <caret line="259" lean-forward="true" selection-start-line="259" selection-end-line="259" />
+            <state relative-caret-position="429">
+              <caret line="209" selection-start-line="209" selection-end-line="209" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -49,17 +50,17 @@
       <file leaf-file-name="insertData.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/insertData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-927">
+            <state relative-caret-position="680">
               <caret line="34" column="6" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="recommendation_system.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="recommendation_system.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/recommendation_system.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+            <state relative-caret-position="403">
+              <caret line="34" column="56" selection-start-line="34" selection-start-column="56" selection-end-line="34" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -96,9 +97,9 @@
         <option value="$USER_HOME$/Desktop/webInterface/compass.py" />
         <option value="$PROJECT_DIR$/hsv.py" />
         <option value="$PROJECT_DIR$/insertData.py" />
-        <option value="$PROJECT_DIR$/recommendation_system.py" />
         <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/movie_project.py" />
+        <option value="$PROJECT_DIR$/recommendation_system.py" />
       </list>
     </option>
   </component>
@@ -122,6 +123,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -138,7 +140,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -160,7 +161,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.movie_project">
+  <component name="RunManager" selected="Flask server.DBMS Project - Reservation System">
     <configuration name="hsv" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="DBMS Project - Reservation System" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -256,12 +257,27 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="DBMS Project - Reservation System" type="Python.FlaskServer" factoryName="Flask server">
+      <module name="DBMS Project - Reservation System" />
+      <option name="target" value="$PROJECT_DIR$/app.py" />
+      <option name="targetType" value="PATH" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+    </configuration>
     <list>
       <item itemvalue="Python.movie_project" />
       <item itemvalue="Python.hsvVal" />
       <item itemvalue="Python.hsv" />
       <item itemvalue="Python.recommendation_system" />
       <item itemvalue="Python.insertData" />
+      <item itemvalue="Flask server.DBMS Project - Reservation System" />
     </list>
     <recent_temporary>
       <list>
@@ -304,7 +320,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32943678" />
       <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49947917" weight="0.40913922" />
       <window_info anchor="bottom" id="Run" order="2" weight="1.0" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32943678" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32943678" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09947917" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.3296875" />
@@ -578,25 +594,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/insertData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-927">
+        <state relative-caret-position="680">
           <caret line="34" column="6" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recommendation_system.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/movie_project.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5180">
-          <caret line="259" lean-forward="true" selection-start-line="259" selection-end-line="259" />
+        <state relative-caret-position="429">
+          <caret line="209" selection-start-line="209" selection-end-line="209" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recommendation_system.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="34" column="56" selection-start-line="34" selection-start-column="56" selection-end-line="34" selection-end-column="56" />
         </state>
       </provider>
     </entry>
