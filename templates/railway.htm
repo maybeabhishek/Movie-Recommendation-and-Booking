@@ -27,7 +27,7 @@
 
   <div class="container banner-container">
     <h3 class="text-info">Search for trains</h3>
-    <select id="flight-name" class="form-control">
+    <select id="train-name" class="form-control">
       <option>Select Trains!</option>
       {% for i in trains: %}
         <option value="{{i[0]}}">{{i[1]}}</option>
@@ -44,7 +44,37 @@
         <button class="btn btn-primary">Search</button>
       </div>
     </form> -->
+
+    <table class="table table-borderless d-none table-sm mt-4" id="trainSelectionTable">
+      <thead class="table-danger">
+        <tr>
+          <td>Type</td>
+          <td>Date</td>
+          <td>Time</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </div>
+
+  <script>
+    document.getElementById("train-name").addEventListener("change", function(){
+      var id = this.value;
+      console.log(this);
+      $.get("/railway/"+id, function(data){
+        console.log(data);
+        var innerHTMLText = '';
+        data.details.forEach(function(train){
+          innerHTMLText+='<tr><td>'+train[1]+'</td><td>'+train[2]+'</td><td>'+train[3]+'</td></td><td><button class="btn btn-sm btn-success" onclick="book('+train[4]+')">Book</button></td>';
+        });
+        document.querySelector("#trainSelectionTable").classList.remove("d-none");
+        document.querySelector("#trainSelectionTable tbody").innerHTML = innerHTMLText;
+
+      })
+    });
+
+  </script>
 </body>
 
 </html>
