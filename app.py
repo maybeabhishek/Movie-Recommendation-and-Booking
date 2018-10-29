@@ -1,7 +1,33 @@
 from flask import Flask, render_template, jsonify
 from Movie import Movie
+from flight_project import Flight
+from train import Train
+import sqlite3
+
+
+isloggedin = False
+loggedinUsername=''
+
+
+
+def authentication(ausername,apwrd):
+	global isloggedin, loggedinUsername
+	db = sqlite3.connect('movie_data.db')
+	data = db.execute('''SELECT PASSWORD FROM LOGIN WHERE USERNAME = ?''',(ausername , ))
+	if (data[0][0]==apwrd):
+		isloggedin = True
+		loggedinUsername = ausername
+	db.close()
+
+def logout():
+	global isloggedin, loggedinUsername
+	isloggedin=False
+	loggedinUsername=False
 
 movie = Movie()
+flight = Flight()
+train = Train()
+
 app = Flask(__name__)
 
 
@@ -29,11 +55,20 @@ def bookMovie(movie_id, projection_id):
 
 @app.route("/flight")
 def renderFlight():
-  return render_template("flight.htm")
+  flights = flight.get_flights()
+  print(flights)
+  return render_template("flight.htm", flights=flights)
+
+@app.route("/flight/<id>")
+def sendFlights():
+  return "NO Flights YET"
 
 @app.route("/railway")
 def renderRailway():
-  return render_template("railway.htm")
+  trains = train.getTrain()
+  return render_template("railway.htm", trains=trains)
+
+
 @app.route("/login")
 def renderLogin():
   return render_template("login.htm")
@@ -42,9 +77,17 @@ def renderLogin():
 def renderRegister():
   return render_template("register.htm")
 
+@app.route("/register", methods=["POST"])
+def registeruser(username,name,phone,eaddr,pwrd):
+	db = sqlite3.connect('movie_data.db')
+	db.execute('''INSERT INTO LOGIN VALUES (?,?,?,?,?)''',(username,name,phone,eaddr,pwrd))
+	db.close()
 
-
-
+@app.route("/bus")
+def renderBus():
+  return render_template("bus.htm")
 
 app.run(port=80, debug=True)
 movie.close()
+train.close()
+flight.close()

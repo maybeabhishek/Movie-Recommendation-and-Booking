@@ -1,6 +1,5 @@
 import sqlite3
-from prettytable import PrettyTable
-from simple_settings import settings
+
 
 
 # db = sqlite3.connect('movie_data.db')
@@ -94,17 +93,22 @@ from simple_settings import settings
 # db.close()
 
 
-class DBCommunicator:
+class Flight:
 
-    def __init__(self, cursor,db):
-        self.cursor = cursor
-        self.db = db
-    def get_movies(self):
+    def __init__(self):
+        self.db = sqlite3.connect("flight_db.db", check_same_thread=False)
+        self.db.row_factory = sqlite3.Row
+        self.cursor = self.db.cursor()
+
+    def close(self):
+        self.db.close()
+
+    def get_flights(self):
         return self.cursor.execute('''SELECT id, flight_name, flight_rating
                                         FROM Flights
                                         ORDER BY flight_rating DESC''')
 
-    def get_projections(self, flight_id):
+    def get_journey(self, flight_id):
         return self.cursor.execute('''SELECT Journey.id, journey_type, journey_time,
                                          journey_date, flight_id, flight_name
                                     FROM Journey
@@ -188,90 +192,3 @@ class Controller:
     def fin_reservation(self, user, journey_id, row, col):
         self.db_communicator.final_reservation(user,journey_id, row, col)
 
-
-class CLI:
-
-    def __init__(self, controller):
-        self.controller = controller
-
-        self.__user_is_active = True
-        self.commands = {
-            "show_flights": self.show_flights,
-            "show_airlines": self.show_airlines,
-            "make_reservations": self.make_reservations,
-            "exit": self.exit
-        }
-
-    def show_flights(self, *args):
-        print(self.controller.generate_flights_table())
-
-    def show_airlines(self, *args):
-        flight_id = args[0]
-        date = None
-        if len(args) > 1:
-            date = args[1]
-        print(self.controller.generate_journey_table(flight_id, date))
-
-    def show_reservations(self, data):
-        print(self.controller.generate_reservations_table(data))
-
-    def make_reservations(self, *args):
-        username = input("Enter your name: ")
-        number_of_tickets = int(input("Enter number of tickets: "))
-        self.show_flights()
-        flight_id = int(input("Enter flight id: "))
-        self.show_airlines(flight_id)
-        journey_id = int(input("Enter journey id: "))
-        self.show_reservations(self.controller.create_cinema(journey_id))
-        # ask for ticket seats
-
-        for i in range(number_of_tickets):
-            ticketR = int(input("Enter Row: "))
-            ticketC = int(input("Enter Column: "))
-            self.controller.fin_reservation(username, journey_id, ticketR, ticketC)
-            print("The ticket is booked\n")
-        # if finalize
-        # insert query
-
-    def exit(self, *args):
-        self.__user_is_active = False
-
-    def start(self):
-        print("Hello!")
-        while self.__user_is_active:
-            command = ""
-            parameter1 = None
-            parameter2 = None
-
-            user_input = input("Enter command: ")
-            user_input = user_input.split()
-            command = user_input[0]
-            if len(user_input) > 1:
-                parameter1 = user_input[1]
-                if len(user_input) > 2:
-                    parameter2 = user_input[2]
-
-            self.commands[command](parameter1, parameter2)
-
-
-class Validator:
-    def __init__(self):
-        pass
-
-    def validate_ticket(self):
-        raise Exception("DA")
-
-
-def main():
-    db = sqlite3.connect("flight_db.db")
-    db.row_factory = sqlite3.Row
-    cursor = db.cursor()
-
-    db_communicator = DBCommunicator(cursor,db)
-    controller = Controller(db_communicator)
-    cli = CLI(controller)
-    cli.start()
-
-
-if __name__ == '__main__':
-    main()
